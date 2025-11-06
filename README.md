@@ -1,119 +1,107 @@
-🚢 Predicción de Tiempos de Operación Portuaria en el puerto de Mazatlan
-Datos obtenidos de https://datos.gob.mx/dataset/reporte_embarcaciones
-Este proyecto utiliza Machine Learning para predecir el número de horas que un buque comercial tardará en completar sus operaciones en puerto. El objetivo es transformar la incertidumbre logística en una ventaja estratégica, permitiendo una planificación de recursos y muelles más eficiente.
+🚢 Predicción de Tiempos de Operación Portuaria - Puerto de Mazatlán
 
-El modelo final es una aplicación web interactiva construida con Streamlit, capaz de predecir tiempos operativos con un Error Absoluto Medio (MAE) de ~3.52 horas.
+Este proyecto utiliza Machine Learning para predecir el número de horas que un buque comercial tardará en completar sus operaciones en puerto. Su objetivo es transformar la incertidumbre logística en una ventaja estratégica, permitiendo una planificación de recursos y muelles más eficiente.
 
-Vistazo a la Aplicación Final (Streamlit)
-En la carpeta numero 8 Pruebas
+Los datos se obtuvieron de datos.gob.mx: Reporte de embarcaciones
 
-El Problema
+📊 Objetivo
+
 En la logística portuaria, el tiempo es el recurso más crítico. La incapacidad de predecir con precisión cuánto tiempo un buque ocupará un muelle genera costos masivos:
 
 Congestión: Buques esperando en el mar.
 
-Costos de Personal: Turnos de trabajo mal asignados.
+Costos de personal: Turnos de trabajo mal asignados.
 
 Ineficiencia: Muelles vacíos o sobrecargados.
 
-Este proyecto aborda el problema analizando datos históricos de tráfico (Ene-Jun 2025) para construir un modelo predictivo que estima el tiempo de operación basándose en las características del buque.
+Este proyecto analiza datos históricos de tráfico (Ene-Jun 2025) y construye un modelo predictivo que estima el tiempo de operación basándose en las características del buque.
 
-Tech Stack (Tecnologías Usadas)
-Análisis y Manipulación: pandas, numpy
+🧰 Tecnologías utilizadas
 
-Modelado y Preprocesamiento: scikit-learn
+Análisis y manipulación de datos: pandas, numpy
 
-Aplicación Web: streamlit
+Modelado y preprocesamiento: scikit-learn
 
-Persistencia del Modelo: joblib
+Aplicación web: Flask y Streamlit (para pruebas interactivas)
+
+Persistencia del modelo: joblib
 
 Visualización: matplotlib, seaborn
 
- Metodología y Flujo del Proyecto
-Este proyecto no fue solo entrenar un modelo; fue un ciclo completo de descubrimiento y refinamiento.
+🔄 Flujo del Proyecto
 
-1. Análisis Exploratorio (EDA)
-El análisis inicial reveló un hallazgo clave: el puerto operaba a "dos velocidades".
+Análisis Exploratorio (EDA)
 
-Una flota comercial (cargueros, petroleros) con operaciones rápidas y predecibles.
+Detectamos que el puerto operaba a "dos velocidades":
 
-Una flota atunera con un comportamiento completamente atípico: estadías extremadamente largas (300-700+ horas) que no se correlacionaban con su tamaño.
+Flota comercial: operaciones rápidas y predecibles.
 
-2. Limpieza y Segmentación
-Se tomó la decisión estratégica de segmentar el análisis. El modelo se enfocaría exclusivamente en la flota comercial para predecir sus operaciones. La flota atunera se considera un problema de negocio separado.
+Flota atunera: operaciones atípicas y extremadamente largas (300–700+ horas).
 
-Se eliminaron los registros de atuneros.
+Limpieza y Segmentación
 
-Se corrigieron errores de captura (ej. un calado_maximo imposible de 31m) y categorías duplicadas.
+Se eliminan registros de atuneros y se corrigen errores de captura.
 
-3. Ingeniería de Características (Feature Engineering)
-Para darle al modelo una "intuición" física, se crearon dos características nuevas, que resultaron ser las más importantes:
+Solo se modela la flota comercial.
 
-densidad_carga: toneladas / (eslora * manga)
+Ingeniería de Características (Feature Engineering)
+Se crearon dos características nuevas:
 
-eficiencia_carga: toneladas / calado_maximo
+densidad_carga = toneladas / (eslora * manga)
 
-4. Modelado y Optimización
-Se probó un RandomForestRegressor por su capacidad para capturar relaciones complejas. Se utilizó GridSearchCV para encontrar la combinación óptima de hiperparámetros, optimizando para el Error Absoluto Medio.
+eficiencia_carga = toneladas / calado_maximo
 
-5. Interpretación y Refinamiento (El Hallazgo Clave)
-El análisis de importancia (feature_importance) reveló un descubrimiento sorprendente:
+Modelado y Optimización
 
-Las variables cajas_40 y cajas_20 (cantidad de contenedores) eran casi irrelevantes (menos del 1% de importancia).
+Se probó un RandomForestRegressor optimizado con GridSearchCV.
 
-El modelo determinó que esta información ya estaba "incluida" en variables más potentes como toneladas y densidad_carga.
+Las variables cajas_40 y cajas_20 resultaron irrelevantes (<1% importancia), por lo que fueron eliminadas para simplificar el modelo.
 
-Acción: El modelo final fue re-entrenado sin las variables de contenedores, resultando en un modelo más ligero, rápido y más preciso.
+Resultados
 
-Resultados y Hallazgos
-Modelo Final
-Modelo: RandomForestRegressor (simplificado)
+MAE (Error Absoluto Medio): 3.52 horas
 
-Error Absoluto Medio (MAE): 3.52 horas.
+R²: 0.61
 
-R-cuadrado (R²): 0.61 (El modelo explica el 61% de la variabilidad en los tiempos).
+El modelo permite pasar de una incertidumbre de días a una ventana de planificación de ±3.5 horas.
 
-Un error de ~3.5 horas no es un "mal modelo"; es un resultado excelente. Transforma una incertidumbre que podía ser de días (vimos operaciones de 8 a 150 horas) en una ventana de planificación precisa, permitiendo al puerto pasar de ser reactivo a proactivo.
+🔑 Importancia de las Características
+Característica	Importancia (%)
+densidad_carga	22.4
+eficiencia_carga	21.4
+toneladas	16.6
+eslora	16.1
+tipo_embarcacion_transbordador	6.1
 
-Importancia de las Características
-Las características más decisivas para el modelo fueron:
 
-densidad_carga (22.4%): La característica creada fue la más importante.
+🚀 Cómo ejecutar la aplicación Flask
 
-eficiencia_carga (21.4%): La segunda característica creada.
-
-toneladas (16.6%)
-
-eslora (16.1%)
-
-tipo_embarcacion_transbordador (6.1%): El modelo aprendió que ser un transbordador reduce significativamente el tiempo.
-
-Cómo Usar este Proyecto
-1. Requisitos Previos
-Asegúrate de tener Python 3.8+ instalado.
-
-2. Clonar el Repositorio
-Bash
+Clonar el repositorio:
 
 git clone https://github.com/angelbvdev/dataEmbarcaciones.git
-cd dataEmbarcaciones
-3. Crear un Entorno Virtual e Instalar Dependencias
-Bash
+cd dataEmbarcaciones/flask_app
+
+
+Crear y activar un entorno virtual:
 
 python -m venv venv
-source venv/bin/activate  # En Windows: venv\Scripts\activate
-pip install -r requirements.txt
-(Asegúrate de tener un archivo requirements.txt con pandas, scikit-learn, streamlit y joblib)
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r ../requirements.txt
 
-4. Ejecutar la Aplicación Streamlit
 
-Entra en la carpeta 7_dashboard 
-Asegúrate de que el modelo entrenado (modelo_final.pkl) esté en la misma carpeta.
+Ejecutar la app Flask:
 
-Bash
+python app.py
 
+
+Abrir el navegador en:
+
+http://localhost:5000
+
+🔍 Cómo ejecutar la app Streamlit de pruebas
+cd ../7_dashboard
 streamlit run app.py
-¡Abre tu navegador en http://localhost:8501 y comienza a hacer predicciones!
 
 📄 Licencia
-Este proyecto está bajo la Licencia MIT.
+
+Este proyecto está bajo Licencia MIT.
