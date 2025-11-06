@@ -2,7 +2,7 @@
 
 Este proyecto utiliza Machine Learning para predecir el número de horas que un buque comercial tardará en completar sus operaciones en puerto. Su objetivo es transformar la incertidumbre logística en una ventaja estratégica, permitiendo una planificación de recursos y muelles más eficiente.
 
-Los datos se obtuvieron de datos.gob.mx: Reporte de embarcaciones
+Los datos se obtuvieron de datos.gob.mx: [Reporte de embarcaciones](https://datos.gob.mx/dataset/reporte_embarcaciones)
 
 📊 Objetivo
 
@@ -79,6 +79,7 @@ tipo_embarcacion_transbordador	6.1
 Clonar el repositorio:
 
 git clone https://github.com/angelbvdev/dataEmbarcaciones.git
+
 cd dataEmbarcaciones/flask_app
 
 
