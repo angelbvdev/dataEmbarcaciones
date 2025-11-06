@@ -71,7 +71,7 @@ Modelo: RandomForestRegressor (simplificado)
 
 Error Absoluto Medio (MAE): 3.52 horas.
 
-R-cuadrado (R²): 0.61 (El modelo explica elhttps://datos.gob.mx/dataset/reporte_embarcaciones 61% de la variabilidad en los tiempos).
+R-cuadrado (R²): 0.61 (El modelo explica el 61% de la variabilidad en los tiempos).
 
 Un error de ~3.5 horas no es un "mal modelo"; es un resultado excelente. Transforma una incertidumbre que podía ser de días (vimos operaciones de 8 a 150 horas) en una ventana de planificación precisa, permitiendo al puerto pasar de ser reactivo a proactivo.
 
@@ -96,7 +96,7 @@ Asegúrate de tener Python 3.8+ instalado.
 Bash
 
 git clone https://github.com/angelbvdev/dataEmbarcaciones.git
-cd tu-repositorio
+cd dataEmbarcaciones
 3. Crear un Entorno Virtual e Instalar Dependencias
 Bash
 
