@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚢 Predicción de Horas de Operación Portuaria</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🚢 Predicción de Horas de Operación Portuaria</h1>
+        <p>Ingresa los datos del buque comercial para estimar su tiempo de operación en puerto.</p>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="tipo_embarcacion">Tipo de Embarcación:</label>
+                <select name="tipo_embarcacion" id="tipo_embarcacion" required>
+                    <option value="transbordador">Transbordador</option>
+                    <option value="carguero">Carguero</option>
+                    <option value="petrolero">Petrolero</option>
+                    <option value="acero">Acero</option>
+                    <option value="car-carrier">Car-Carrier</option>
+                    <option value="contenedor">Contenedor</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="toneladas">Tonelaje (t):</label>
+                <input type="number" name="toneladas" id="toneladas" min="100" max="50000" step="10" value="5000" required>
+            </div>
+
+            <div class="form-group">
+                <label for="eslora">Eslora (m):</label>
+                <input type="number" name="eslora" id="eslora" min="20" max="300" step="1" value="150" required>
+            </div>
+
+            <div class="form-group">
+                <label for="manga">Manga (m):</label>
+                <input type="number" name="manga" id="manga" min="5" max="50" step="0.1" value="25" required>
+            </div>
+
+            <div class="form-group">
+                <label for="calado_maximo">Calado Máximo (m):</label>
+                <input type="number" name="calado_maximo" id="calado_maximo" min="3" max="20" step="0.1" value="10" required>
+            </div>
+
+            <button type="submit">Estimar Horas</button>
+        </form>
+
+        {% if pred is not none %}
+        <div class="resultado">
+            <h2>⏱ Tiempo Estimado de Operación:</h2>
+            <p>{{ pred }} horas</p>
+            <p class="info">Rango esperado basado en MAE: {{ pred - 3.52 | round(2) }} - {{ pred + 3.52 | round(2) }} horas</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

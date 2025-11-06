@@ -1,2 +1,0 @@
-total_registros,columnas,columnas_con_nulos,banderas_top,tipos_embarcacion_top
-379,30,"{'num_ref': 3, 'numero_imo': 1, 'fecha_hora_zarpe': 2, 'vehiculos': 328, 'cajas_20': 354, 'cajas_40': 350, 'horas_buque_muelle': 5}","{'mexicana': 187, 'panamá': 53, 'islas marshall': 39, 'liberia': 34, 'singapur': 18}","{'transbordador': 152, 'petrolero': 88, 'carguero': 60, 'car-carrier': 42, 'contenedor': 36}"

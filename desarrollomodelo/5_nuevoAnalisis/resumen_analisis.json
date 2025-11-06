@@ -1,0 +1,21 @@
+{
+    "total_registros":379,
+    "columnas":30,
+    "outliers_detectados":{
+        "toneladas":28,
+        "eslora":0,
+        "calado_maximo":0,
+        "horas_buque_puerto":17,
+        "horas_buque_operacion":27
+    },
+    "tipos_embarcacion":6,
+    "banderas":21,
+    "meses":[
+        "junio",
+        "abril",
+        "enero",
+        "marzo",
+        "febrero",
+        "mayo"
+    ]
+}
