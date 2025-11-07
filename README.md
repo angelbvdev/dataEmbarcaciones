@@ -13,6 +13,13 @@ Tecnologías usadas: Python, Machine Learning, Flask y Streamlit para la app web
 En resumen: transforma la incertidumbre de los tiempos de operación en información útil para tomar decisiones rápidas y seguras.
 
 
+
+
+
+
+
+
+
 Proyecto completo:
 
 🚢 Predicción de Tiempos de Operación Portuaria - Puerto de Mazatlán
