@@ -1,3 +1,20 @@
+Resumen Simple:
+
+🚢 Predicción de Tiempos de Operación Portuaria
+
+Este proyecto ayuda a predecir cuánto tiempo tardará un barco comercial en completar sus operaciones en el puerto de Mazatlán.
+
+En un puerto, no saber cuánto tiempo ocupará cada barco puede causar esperas, pérdidas de dinero y mala organización. Con este proyecto, usamos datos históricos de barcos y un modelo de inteligencia artificial para estimar ese tiempo de manera precisa.
+
+El modelo final puede decir, por ejemplo, que un barco tardará aproximadamente 12 horas, con un margen de error de ±3.5 horas. Esto permite al puerto planificar muelles, personal y operaciones de forma eficiente.
+
+Tecnologías usadas: Python, Machine Learning, Flask y Streamlit para la app web.
+
+En resumen: transforma la incertidumbre de los tiempos de operación en información útil para tomar decisiones rápidas y seguras.
+
+
+Proyecto completo:
+
 🚢 Predicción de Tiempos de Operación Portuaria - Puerto de Mazatlán
 
 Este proyecto utiliza Machine Learning para predecir el número de horas que un buque comercial tardará en completar sus operaciones en puerto. Su objetivo es transformar la incertidumbre logística en una ventaja estratégica, permitiendo una planificación de recursos y muelles más eficiente.
